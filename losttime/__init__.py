@@ -18,8 +18,8 @@ except IOError:
 
 ### Force SSL
 
-from flask_sslify import SSLify
-sslify = SSLify(app)
+# from flask_sslify import SSLify
+# sslify = SSLify(app)
 
 ### Setup the logger
 

@@ -16,6 +16,8 @@ from math import floor
 from defusedxml.ElementTree import parse
 from datetime import datetime
 
+unicode = str
+
 class Event(object):
     def __init__(self, name, date, venue):
         self.name = name
@@ -452,11 +454,11 @@ class OrienteerResultReader(object):
             return self.__CSVgetEventClassShortName(line)
     def __CSVgetPersonResultName(self, line):
         if 'name' in self.csvcols.keys():
-            name = unicode(line[self.csvcols['name']].strip('\"\'\/\\ '), 'utf-8')
+            name = line[self.csvcols['name']].strip('\"\'\/\\ ')
             return unicodedata.normalize('NFKD', name).encode('ascii', 'ignore')
         elif 'first' in self.csvcols.keys() and 'last' in self.csvcols.keys():
-            first = unicode(line[self.csvcols['first']].strip('\"\'\/\\ '), 'utf-8')
-            last = unicode(line[self.csvcols['last']].strip('\"\'\/\\ '), 'utf-8')
+            first = unicode(line[self.csvcols['first']].strip('\"\'\/\\ '))
+            last = unicode(line[self.csvcols['last']].strip('\"\'\/\\ '))
             return unicodedata.normalize('NFKD', first + ' ' + last).encode('ascii', 'ignore')
         else:
             return ''
